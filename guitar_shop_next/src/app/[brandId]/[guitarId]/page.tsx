@@ -11,6 +11,7 @@ import { useLanguage } from "@/app/providers/LanguageContext";
 import specs from "../../../../translations/specs";
 import ErrComponent from "@/app/components/suspense/ErrComponent";
 import ItemNotFound from "@/app/components/suspense/ItemNotFound";
+import { useEffect } from "react";
 
 const GUITAR_SPECS = gql`
   query FindUniqueModel($brandId: ID!, $modelId: ID!) {
@@ -59,6 +60,11 @@ export default function GuitarPage() {
     return <ItemNotFound msgOne={t.modelNotFound} msgTwo={t.badParams} />;
   const model = data.findUniqueModel;
 
+  useEffect(() => {
+    if (!data) return;
+
+    console.log(data);
+  }, [data]);
   return (
     <main>
       <GuitarSpecsHero imgUrl={model.image} nameModle={model.name} />

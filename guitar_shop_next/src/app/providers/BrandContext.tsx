@@ -44,6 +44,8 @@ export const BrandProvider = ({ children }: { children: React.ReactNode }) => {
     if (data?.findAllBrands) {
       setBrands(data.findAllBrands);
     }
+
+    console.log(data);
   }, [data]);
 
   return (

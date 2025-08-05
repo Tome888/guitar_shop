@@ -117,6 +117,12 @@ export default function GuitarSelection() {
     skip: !brandId,
   });
 
+  useEffect(() => {
+    if (!data) return;
+
+    console.log(data, "guitars data");
+  }, [data]);
+
   // calc the models filtered
   const filteredModels =
     data?.searchModels?.filter((model: GuitarModel) => {
