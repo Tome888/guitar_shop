@@ -1,5 +1,3 @@
-import guitarsData from "./guitarsData";
-
 const modelSpecs = [
   {
     __typename: "Model",
