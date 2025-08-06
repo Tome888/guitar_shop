@@ -1,6 +1,5 @@
 "use client";
 
-import { gql, useQuery } from "@apollo/client";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState, useCallback } from "react";
 
@@ -15,19 +14,6 @@ import Loading from "../suspense/Loading";
 import ErrComponent from "../suspense/ErrComponent";
 import ItemNotFound from "../suspense/ItemNotFound";
 
-const SEARCH_MODELS = gql`
-  query SearchModels($brandId: String!, $name: String!) {
-    searchModels(brandId: $brandId, name: $name) {
-      id
-      name
-      type
-      image
-      description
-      price
-    }
-  }
-`;
-
 type GuitarModel = {
   id: string;
   name: string;
@@ -35,7 +21,7 @@ type GuitarModel = {
   image: string;
   price: number;
   type: string;
-  __typename: string;
+  __typename?: string;
 };
 
 export default function GuitarSelection() {
@@ -45,7 +31,9 @@ export default function GuitarSelection() {
   const brandId = params.brandId as string;
   const { language } = useLanguage();
   const t = shop[language];
-
+  const [data, setData] = useState<GuitarModel[] | []>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   // Getting the url params
   const filterInput = searchParams?.get("filter") || "";
   const searchInput = searchParams?.get("search") || "";
@@ -108,24 +96,25 @@ export default function GuitarSelection() {
     [updateSearchParams]
   );
 
-  // getting the models if we have
-  const { data, loading, error } = useQuery(SEARCH_MODELS, {
-    variables: {
-      brandId,
-      name: "",
-    },
-    skip: !brandId,
-  });
-
   useEffect(() => {
-    if (!data) return;
-
-    console.log(data, "guitars data");
-  }, [data]);
+    fetch(`/api/${brandId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!data) return;
+        setData(data);
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [brandId]);
 
   // calc the models filtered
   const filteredModels =
-    data?.searchModels?.filter((model: GuitarModel) => {
+    data?.filter((model: GuitarModel) => {
       const matchesType = filterInput === "" || model.type === filterInput;
       const matchesSearch =
         searchInput === "" ||
@@ -138,11 +127,7 @@ export default function GuitarSelection() {
     if (!data) return;
 
     const uniqueTypes = [
-      ...new Set(
-        data.searchModels
-          .map((model: GuitarModel) => model.type)
-          .filter(Boolean)
-      ),
+      ...new Set(data.map((model: GuitarModel) => model.type).filter(Boolean)),
     ];
 
     setArrTypes(uniqueTypes as string[]);
@@ -177,7 +162,7 @@ export default function GuitarSelection() {
   }, [filteredModels.length, itemsPerPage, page, handlePageChange]);
 
   if (loading) return <Loading msg={"Loading..."} />;
-  if (error) return <ErrComponent errMsg={error.message} />;
+  if (error) return <ErrComponent errMsg={error} />;
 
   const start = (page - 1) * itemsPerPage;
   const end = start + itemsPerPage;

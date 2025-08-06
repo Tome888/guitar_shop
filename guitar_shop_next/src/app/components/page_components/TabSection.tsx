@@ -21,7 +21,7 @@ export interface Musician {
   musicianImage: string;
   bands: string[];
 }
-interface ModelObjProps {
+export interface ModelObjProps {
   id: string;
   name: string;
   type: string;

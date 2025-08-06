@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { GraphQLProvider } from "./providers/graphql-provider";
+
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import { BrandProvider } from "./providers/BrandContext";
@@ -24,6 +24,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Vibe Strings",
   description: "Guitar Shop",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
@@ -36,17 +39,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
       >
-        <GraphQLProvider>
-          <BrandProvider>
-            <LanguageProvider>
-              <>
-                <NavBar />
-                {children}
-                <Footer />
-              </>
-            </LanguageProvider>
-          </BrandProvider>
-        </GraphQLProvider>
+        <BrandProvider>
+          <LanguageProvider>
+            <>
+              <NavBar />
+              {children}
+              <Footer />
+            </>
+          </LanguageProvider>
+        </BrandProvider>
       </body>
     </html>
   );

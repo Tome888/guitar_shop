@@ -16,7 +16,7 @@ export default function SelectBrand() {
   const t = home[language];
 
   if (loading) return <Loading msg={"Loading..."} />;
-  if (error) return <ErrComponent errMsg={error.message} />;
+  if (error) return <ErrComponent errMsg={error} />;
 
   return (
     <section className="w-full flex flex-col justify-center items-center gap-1 pt-25 pb-25">
