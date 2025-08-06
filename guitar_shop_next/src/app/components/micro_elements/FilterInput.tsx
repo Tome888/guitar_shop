@@ -35,7 +35,7 @@ export default function FilterInput({
   const isActive = field !== "";
 
   return (
-    <div className="relative w-fit">
+    <div className="relative w-full sm:w-auto">
       <div
         className={`flex gap-2 justify-evenly items-center w-[350px] border cursor-pointer p-2 transition-colors duration-200
           ${isActive ? "border-orange-200 text-[#FF8C60]" : "border-gray-200"}

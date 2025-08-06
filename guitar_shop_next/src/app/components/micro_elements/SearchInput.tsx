@@ -22,7 +22,7 @@ export default function SearchInput({ setSearch }: SearchInputProps) {
   };
 
   return (
-    <div className="flex gap-2 justify-between items-center w-[350px] border cursor-pointer p-2 transition-colors duration-200 border-gray-200">
+    <div className="flex gap-2 w-full sm:w-auto justify-between items-center border cursor-pointer p-2 transition-colors duration-200 border-gray-200">
       <Search />
 
       <input

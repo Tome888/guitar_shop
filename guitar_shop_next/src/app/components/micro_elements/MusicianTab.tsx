@@ -21,10 +21,9 @@ export default function MusicianTab({ musiciansArr }: MusicianTabProps) {
   );
 
   return (
-    <div className="w-full flex flex-col items-center justify-start ">
+    <div className="w-full flex flex-col items-center justify-start">
       <div className="w-full flex items-center justify-center flex-wrap gap-6 py-6">
         {visibleMusicians.map((mus, idx) => (
-          // added custom fallback image component for the same reason as the other images
           <MusicianCard
             key={idx}
             imgUrl={mus.musicianImage}
@@ -38,6 +37,8 @@ export default function MusicianTab({ musiciansArr }: MusicianTabProps) {
           <button
             key={idx}
             onClick={() => setCurrentPage(idx)}
+            aria-label={`Go to page ${idx + 1}`}
+            aria-current={currentPage === idx ? "page" : undefined}
             className={`transition-all duration-300 cursor-pointer ease-in-out rounded-full bg-[#D9D9D9] ${
               currentPage === idx ? "w-6 h-6" : "w-3 h-3"
             }`}

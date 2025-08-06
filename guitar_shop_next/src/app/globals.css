@@ -144,3 +144,31 @@ section {
 .specsHeroImage {
   rotate: 320deg;
 }
+
+h1,
+h2 {
+  text-decoration: underline !important;
+  text-decoration-color: #fe9900 !important;
+}
+
+@media (max-width: 768px) {
+  section {
+    padding-right: 0rem;
+    padding-left: 0rem;
+  }
+  body > * {
+    overflow-x: hidden !important;
+  }
+  nav {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+  }
+  .custLogo {
+    width: 150px;
+  }
+  footer {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}

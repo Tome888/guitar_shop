@@ -7,7 +7,7 @@ interface SpecsData {
 
 export default function SpecsTab({ dataSpecs, descModel }: SpecsData) {
   return (
-    <div className="w-[100%] gap-4 flex flex-col items-start justify-start pt-10 pb-40 pl-24 pr-24">
+    <div className="w-full gap-4 flex flex-col items-start justify-start pt-10 pb-10 px-6 md:pt-10 md:pb-40 md:px-24">
       <p className="text-bigger">{descModel}</p>
 
       <div className="text-bigger">
@@ -15,8 +15,8 @@ export default function SpecsTab({ dataSpecs, descModel }: SpecsData) {
         <div>• Neck Wood: {dataSpecs.neckWood}</div>
         <div>• Fingerboard: {dataSpecs.fingerboardWood}</div>
         <div>• Pickups: {dataSpecs.pickups}</div>
-        <div>• Tunners: {dataSpecs.tuners}</div>
-        <div>• Scale Lenght: {dataSpecs.scaleLength}</div>
+        <div>• Tuners: {dataSpecs.tuners}</div>
+        <div>• Scale Length: {dataSpecs.scaleLength}</div>
         <div>• Bridge: {dataSpecs.bridge}</div>
       </div>
     </div>

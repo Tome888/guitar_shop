@@ -170,11 +170,12 @@ export default function GuitarSelection() {
 
   return (
     <section className="flex flex-col justify-center items-center pb-20 pt-20">
-      <h2 className="text-xl text-[44px] font-bold text-zinc-950 mb-4">
+      <h2 className="text-xl text-center text-[44px] font-bold text-zinc-950 mb-4">
         {t.selectSectionTitle}
       </h2>
 
-      <div className="flex justify-end items-end w-full gap-4">
+      {/* Filters and search */}
+      <div className="flex flex-col sm:flex-row justify-end items-end w-full gap-4 mb-4 px-4 sm:px-0">
         <FilterInput
           field={filterInput}
           setFiled={handleFilterChange}
@@ -183,12 +184,14 @@ export default function GuitarSelection() {
 
         <SearchInput setSearch={handleSearchChange} />
       </div>
+
+      {/* Scroll container */}
       {pagedModels.length === 0 ? (
         <ItemNotFound msgOne={t.notFound} msgTwo={t.adjust} />
       ) : (
         <div
           ref={scrollContainerRef}
-          className="flex flex-wrap justify-start pl-20 items-start p-3 w-full gap-6 overflow-y-auto max-h-[700px] min-h-[500px] mt-10"
+          className="flex flex-wrap justify-start pl-4 sm:pl-20 items-start p-3 w-full gap-6 overflow-y-auto max-h-[700px] min-h-[500px] mt-4"
         >
           {pagedModels.map((model: GuitarModel) => (
             <GuitarCard
@@ -202,7 +205,8 @@ export default function GuitarSelection() {
         </div>
       )}
 
-      <div className="w-full flex justify-between items-center">
+      {/* Pagination */}
+      <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-4 px-4 sm:px-0 mt-6">
         <PaginationInfo
           total={filteredModels.length}
           start={start}
