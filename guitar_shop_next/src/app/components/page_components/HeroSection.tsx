@@ -18,6 +18,12 @@ export default function HeroSection() {
         </p>
       </div>
 
+      <img
+        src="/brand_images/Ibanez-Logo.png"
+        alt=""
+        className="w-[200px] h-[200px]"
+      />
+
       <div className="testImage"></div>
     </section>
   );
